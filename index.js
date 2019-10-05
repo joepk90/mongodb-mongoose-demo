@@ -133,7 +133,7 @@ async function getCourses() {
 
 };
 
-getCourses();
+// getCourses();
 
 /**
  * Query and Update Course by ID
