@@ -34,16 +34,35 @@ async function createCourse() {
 
 // createCourse();
 
-// basic mongodb query
+// mongodb query examples
 async function getCourses() {
+
+    // example comparison operators
+    // eq (equal)
+    // ne (not equal)
+    // gt (greater than)
+    // gte (greater than or equal to)
+    // lt (less than)
+    // lte (less than or equal to)
+    // in
+    // nin (not in)
 
     // const courses = await Course.find(); // return all course objects
 
-    const courses = await Course.
-    find({
-        author: "Mosh",
-        isPublished: true
-    })
+    const courses = await Course
+
+    // simple query
+    // .find({
+    //     author: "Mosh",
+    //     isPublished: true
+    // })
+
+    // example comparison operator: greater than or equalt 10 / less than or equal to 20
+    // .find({ price:  { $gte: 10, $lte: 20 } })
+
+    // example comparison operator: objects containing specific values (in operator)
+    // .find({ price: {$in: [10, 15, 20] } })
+
     .limit(10)
     .sort({ name: 1 }) // means ascending order (-1 = decending)
     .select({ name: 1, tags: 1 }); // only return name and tags properties
