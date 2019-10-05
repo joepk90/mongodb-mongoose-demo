@@ -57,10 +57,10 @@ async function getCourses() {
     const courses = await Course
 
     // simple query
-    // .find({
-    //     author: "Mosh",
-    //     isPublished: true
-    // })
+    .find({
+        author: "Mosh",
+        isPublished: true
+    })
 
     // example comparison operator: greater than or equalt 10 / less than or equal to 20
     // .find({ price:  { $gte: 10, $lte: 20 } })
@@ -90,9 +90,10 @@ async function getCourses() {
 
     .limit(10)
     .sort({ name: 1 }) // means ascending order (-1 = decending)
-    .select({ name: 1, tags: 1 }); // only return name and tags properties
+    // .select({ name: 1, tags: 1 }) // only return name and tags properties
+    .count();
     console.log(courses);
 
 };
 
-// getCourses();
+getCourses();
