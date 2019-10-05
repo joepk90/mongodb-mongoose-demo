@@ -16,9 +16,20 @@ const courseSchema = new mongoose.Schema({
 
 // takes the singular name
 const Course = mongoose.model( 'Course', courseSchema );
-const course = new Course({
-    name: 'Node.js Course',
-    author: 'Mosh',
-    tags: ['node, backend'],
-    isPublished: true
-});
+
+// creating a mongodb model/collection
+async function createCourse() {
+
+    const course = new Course({
+        name: 'Angular Course',
+        author: 'Mosh',
+        tags: ['angular', 'frontend'],
+        isPublished: true
+    });
+    
+    const result = await course.save();
+    console.log(result);
+
+};
+
+createCourse();
