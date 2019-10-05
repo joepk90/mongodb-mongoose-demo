@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/playground')
 // to connect to mongoDB, make sure mongodb is running on localhost. run:
 // mongod
 const courseSchema = new mongoose.Schema({
-    name: String,
+    name: { type: String, required: true },
     author: String,
     tags: [ String ],
     date: { type: Date, default: Date.now },
@@ -27,8 +27,19 @@ async function createCourse() {
         isPublished: true
     });
     
-    const result = await course.save();
-    console.log(result);
+    try {
+
+        // manual validation. unfortunately mongoose's validate function does not return boolean, just returns void. 
+        // callback required to check response
+        // await course.validate((err) => {
+        //     if (err) {}
+        // });
+
+        const result = await course.save();
+        console.log(result);
+    } catch(ex) {
+        console.log(ex.message);
+    }
 
 };
 
