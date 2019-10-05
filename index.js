@@ -133,3 +133,42 @@ async function queryAndUpdateCourse(id) {
 }
 
 // queryAndUpdateCourse("5d988453960366b7c20c5abb");
+
+/**
+ * Update Course without Querying Document First
+ * @param {*} id 
+ */
+async function updateCourse(id) {
+
+    // approach: update first
+    // update directly
+    // optionally: get the updated document
+
+
+    // just update a document
+    // const result = await Course.update( {_id: id}, {
+    //     $set: {
+    //         author: 'Joe',
+    //         isPublished: false
+    //     }
+    // } );
+    //
+    // console.log(result);
+
+    // optionally display the updated document or the document before it was updated
+    // const dispayUpdatedDocument = {}; 
+    const dispayUpdatedDocument = { new: true }; 
+
+    // update a document and return it
+    const course = await Course.findByIdAndUpdate(id, {
+        $set: {
+            author: 'Sally',
+            isPublished: true
+        }
+    }, dispayUpdatedDocument);
+
+    console.log(course);
+
+}
+
+// updateCourse("5d988453960366b7c20c5abb");
