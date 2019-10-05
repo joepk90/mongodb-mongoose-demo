@@ -54,6 +54,10 @@ async function getCourses() {
 
     // const courses = await Course.find(); // return all course objects
 
+    // usually set by URL paramaters
+    const pageNumber = 2;
+    const pageSize = 10;
+
     const courses = await Course
 
     // simple query
@@ -88,10 +92,13 @@ async function getCourses() {
     // regular expression example: contains Mosh
     // .find({ author: /.*Mosh.*/ })
 
-    .limit(10)
+    // using pagination
+    .skip((pageNumber - 1) * pageSize)
+    .limit(pageSize) 
+
     .sort({ name: 1 }) // means ascending order (-1 = decending)
-    // .select({ name: 1, tags: 1 }) // only return name and tags properties
-    .count();
+    .select({ name: 1, tags: 1 }) // only return name and tags properties
+    // .count();
     console.log(courses);
 
 };
