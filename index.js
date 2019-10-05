@@ -1,3 +1,8 @@
+/**
+ * See mongo-mongoose-query-exercises for examples of logical and conditional query operators
+ * https://github.com/joepk90/mongo-mongoose-query-exercises 
+ */
+
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/playground')
@@ -6,7 +11,6 @@ mongoose.connect('mongodb://localhost/playground')
 
 // to connect to mongoDB, make sure mongodb is running on localhost. run:
 // mongod
-
 
 /**
  * Instantiate Mongoose schema
