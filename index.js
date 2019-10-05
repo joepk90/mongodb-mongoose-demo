@@ -73,6 +73,21 @@ async function getCourses() {
     // .or([ { author: 'Mosh' }, { isPublished: true } ])
     // .and([])
 
+    // regular expression:
+    // .find({ author: /pattern/ })
+
+    // regular expression example: starts with Mosh
+    // .find({ author: /^Mosh/ })
+
+    // regular expression example: ends with Park-Kennaby (case sensitive)
+    // .find({ author: /Park-Kennaby$/ })
+
+    // regular expression example: ends with Park-Kennaby (case insensitive)
+    // .find({ author: /Park-Kennaby$/i })
+
+    // regular expression example: contains Mosh
+    // .find({ author: /.*Mosh.*/ })
+
     .limit(10)
     .sort({ name: 1 }) // means ascending order (-1 = decending)
     .select({ name: 1, tags: 1 }); // only return name and tags properties
