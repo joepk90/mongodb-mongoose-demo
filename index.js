@@ -22,7 +22,10 @@ const courseSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['web', 'mobile', 'network'] // enum usage: one of these categories must be provided
+        enum: ['web', 'mobile', 'network'], // enum usage: one of these categories must be provided
+        // lowercase: true, // convert string to lowercase
+        // uppercase: true, // convert string to uppercase
+        // trim: true // trim paddings around string
     },
     author: String,
     tags: {
@@ -53,7 +56,9 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         required: function() { return this.isPublished }, // price required if isPublished is true
         min: 10,
-        max: 200
+        max: 200,
+        // set: v => Math.round(v), // function than run when setting data to db
+        // get: v => Math.round(v) // function that run when getting data from db (use console.log(courses[0].price))
     }
 });
 
@@ -78,9 +83,9 @@ async function createCourse() {
         name: 'Angular Course',
         category: 'web',
         author: 'Mosh',
-        tags: ['angular', 'frontend'],
+        tags: ['frontend'],
         isPublished: true,
-        price: 17
+        price: 15.8
     });
 
     try {
@@ -105,7 +110,7 @@ async function createCourse() {
 // createCourse();
 
 // mongodb query examples
-async function getCourses() {
+async function getCourses(id = null) {
 
     // example comparison operators
     // eq (equal)
@@ -125,15 +130,16 @@ async function getCourses() {
     // const courses = await Course.find(); // return all course objects
 
     // usually set by URL paramaters
-    const pageNumber = 2;
-    const pageSize = 10;
+    // const pageNumber = 2;
+    // const pageSize = 10;
 
     const courses = await Course
 
     // simple query
     .find({
-        author: "Mosh",
-        isPublished: true
+        // author: "Mosh",
+        // isPublished: true
+        _id: id
     })
 
     // example comparison operator: greater than or equalt 10 / less than or equal to 20
@@ -163,11 +169,11 @@ async function getCourses() {
     // .find({ author: /.*Mosh.*/ })
 
     // using pagination
-    .skip((pageNumber - 1) * pageSize)
-    .limit(pageSize) 
+    // .skip((pageNumber - 1) * pageSize)
+    // .limit(pageSize) 
 
-    .sort({ name: 1 }) // means ascending order (-1 = decending)
-    .select({ name: 1, tags: 1 }) // only return name and tags properties
+    // .sort({ name: 1 }) // means ascending order (-1 = decending)
+    .select({ name: 1, tags: 1, price: 1 }) // only return name and tags properties
     // .count();
     console.log(courses);
 
