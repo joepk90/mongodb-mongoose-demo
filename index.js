@@ -6,6 +6,11 @@ mongoose.connect('mongodb://localhost/playground')
 
 // to connect to mongoDB, make sure mongodb is running on localhost. run:
 // mongod
+
+
+/**
+ * Instantiate Mongoose schema
+ */
 const courseSchema = new mongoose.Schema({
     name: { 
         type: String,
@@ -52,10 +57,21 @@ const courseSchema = new mongoose.Schema({
     }
 });
 
-// takes the singular name
+
+
+/**
+ * Create Course schema
+ * 
+ * takes the singular name
+ */
 const Course = mongoose.model( 'Course', courseSchema );
 
-// creating a mongodb model/collection
+
+/**
+ * Save Document to MongoDB
+ * 
+ * creating a mongodb model/collection
+ */
 async function createCourse() {
 
     const course = new Course({
