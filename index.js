@@ -172,3 +172,24 @@ async function updateCourse(id) {
 }
 
 // updateCourse("5d988453960366b7c20c5abb");
+
+async function removeCourse(id) {
+
+    // will find the first unpublished document and delete it
+    // Course.deleteOne({ isPublished: false });
+
+    // delete one object
+    // const result = await Course.deleteOne({ _id: id });
+
+    // delete multiple objects
+    // const result = await Course.deleteMany({ _id: id });
+
+    // console.log(result);
+
+    const result = await Course.findByIdAndRemove(id);
+
+    console.log(result);
+    
+}
+
+// removeCourse("5d988453960366b7c20c5abb");
