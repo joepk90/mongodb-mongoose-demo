@@ -7,11 +7,28 @@ mongoose.connect('mongodb://localhost/playground')
 // to connect to mongoDB, make sure mongodb is running on localhost. run:
 // mongod
 const courseSchema = new mongoose.Schema({
-    name: { type: String, required: true },
+    name: { 
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 255,
+        // match: '/pattern/'
+    },
+    category: {
+        type: String,
+        required: true,
+        enum: ['web', 'mobile', 'network'] // enum usage: one of these categories must be provided
+    },
     author: String,
     tags: [ String ],
     date: { type: Date, default: Date.now },
-    isPublished: Boolean
+    isPublished: Boolean,
+    price: {
+        type: Number,
+        required: function() { return this.isPublished }, // price required if isPublished is true
+        min: 10,
+        max: 200
+    }
 });
 
 // takes the singular name
@@ -22,11 +39,13 @@ async function createCourse() {
 
     const course = new Course({
         name: 'Angular Course',
+        category: 'web',
         author: 'Mosh',
         tags: ['angular', 'frontend'],
-        isPublished: true
+        isPublished: true,
+        price: 15
     });
-    
+
     try {
 
         // manual validation. unfortunately mongoose's validate function does not return boolean, just returns void. 
