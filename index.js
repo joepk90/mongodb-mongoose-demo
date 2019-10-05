@@ -47,6 +47,11 @@ async function getCourses() {
     // in
     // nin (not in)
 
+    // logical operators
+    // or
+    // and
+
+
     // const courses = await Course.find(); // return all course objects
 
     const courses = await Course
@@ -62,6 +67,11 @@ async function getCourses() {
 
     // example comparison operator: objects containing specific values (in operator)
     // .find({ price: {$in: [10, 15, 20] } })
+
+    // example logic operators: find posts authored by Mosh, or are public
+    // .find()
+    // .or([ { author: 'Mosh' }, { isPublished: true } ])
+    // .and([])
 
     .limit(10)
     .sort({ name: 1 }) // means ascending order (-1 = decending)
